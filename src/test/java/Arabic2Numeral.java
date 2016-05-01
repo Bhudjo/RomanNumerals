@@ -1,19 +1,11 @@
-import org.junit.Ignore;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by John on 01-May-16.
- */
 public class Arabic2Numeral {
     @org.junit.Test
     public void One() throws Exception {
-        assertEquals("I",convert(1));
+        assertEquals("I", convert(1));
     }
 
     @Test
@@ -25,14 +17,17 @@ public class Arabic2Numeral {
     public void Four() throws Exception {
         assertEquals("IV", convert(4));
     }
+
     @Test
     public void Five() throws Exception {
         assertEquals("V", convert(5));
     }
+
     @Test
     public void Six() throws Exception {
         assertEquals("VI", convert(6));
     }
+
     @Test
     public void Eight() throws Exception {
         assertEquals("VIII", convert(8));
@@ -43,27 +38,37 @@ public class Arabic2Numeral {
         assertEquals("IX", convert(9));
     }
 
+    @Test
+    public void Ten() throws Exception {
+        assertEquals("X", convert(10));
+    }
+
     private String convert(int arabic) {
-        String roman = "";
+
+        StringBuilder roman = new StringBuilder();
         int remaining = arabic;
-        if(arabic-5==-1){
-            roman = "IV";
-        }else {
-            if (arabic-10==-1){
-                roman = "IX";
-            }else {
-                if (arabic - 5 >= 0) {
-                    roman = "V";
-                    remaining -= 5;
-                } else if (arabic - 10 >= 0) {
-                    roman = "X";
-                    remaining -= 10;
-                }
-                for (int i = 0; i < remaining; i++) {
-                    roman += "I";
-                }
-            }
+
+        if (arabic - 10 == -1) {
+            return "IX";
         }
-        return roman;
+        if (arabic - 5 == -1) {
+            return "IV";
+        }
+        remaining = dosomething(remaining, "X", 10, roman);
+        remaining = dosomething(remaining, "V", 5, roman);
+
+        for (int i = 0; i < remaining; i++) {
+            roman.append("I");
+        }
+        return roman.toString();
+    }
+
+    private int dosomething(int num, String roman, int arabic, StringBuilder result) {
+        int remaining = num - arabic;
+        if (remaining >= 0) {
+            result.append(roman);
+            return remaining;
+        }
+        return num;
     }
 }
