@@ -48,10 +48,10 @@ public class Arabic2Numeral {
         StringBuilder roman = new StringBuilder();
         int remaining = arabic;
 
-        remaining = dosomething(remaining, "X", 10, roman);
-        remaining = dosomething(remaining, "IX", 9, roman);
-        remaining = dosomething(remaining, "V", 5, roman);
-        remaining = dosomething(remaining, "IV", 4, roman);
+        remaining = substitute(remaining, "X", 10, roman);
+        remaining = substitute(remaining, "IX", 9, roman);
+        remaining = substitute(remaining, "V", 5, roman);
+        remaining = substitute(remaining, "IV", 4, roman);
 
         for (int i = 0; i < remaining; i++) {
             roman.append("I");
@@ -59,12 +59,12 @@ public class Arabic2Numeral {
         return roman.toString();
     }
 
-    private int dosomething(int num, String roman, int arabic, StringBuilder result) {
-        int remaining = num - arabic;
+    private int substitute(int number, String roman, int arabic, StringBuilder result) {
+        int remaining = number - arabic;
         if (remaining >= 0) {
             result.append(roman);
             return remaining;
         }
-        return num;
+        return number;
     }
 }
