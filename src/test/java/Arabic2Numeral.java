@@ -48,14 +48,10 @@ public class Arabic2Numeral {
         StringBuilder roman = new StringBuilder();
         int remaining = arabic;
 
-        if (arabic - 10 == -1) {
-            return "IX";
-        }
-        if (arabic - 5 == -1) {
-            return "IV";
-        }
         remaining = dosomething(remaining, "X", 10, roman);
+        remaining = dosomething(remaining, "IX", 9, roman);
         remaining = dosomething(remaining, "V", 5, roman);
+        remaining = dosomething(remaining, "IV", 4, roman);
 
         for (int i = 0; i < remaining; i++) {
             roman.append("I");
